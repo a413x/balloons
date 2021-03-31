@@ -5,7 +5,7 @@ export function getRandomColor(){
   return 'rgb(' + r + ',' + g + ',' + b + ')'
 }
 
-function getRandom(min, max) {
+export function getRandom(min, max) {
   min = Math.ceil(min)
   max = Math.floor(max)
   return Math.floor(Math.random() * (max - min)) + min
