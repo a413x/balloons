@@ -1,4 +1,4 @@
-import {createBalloonSvg} from '../createBalloonSvg.js'
+import {createBalloonSvg, dimensions} from '../createBalloonSvg.js'
 import {getRandom} from '../utils.js'
 
 export class Balloon{
@@ -18,6 +18,7 @@ export class Balloon{
     this.setPosition()
 
     this.speed = getRandom(50, 100)
+    this.id = Date.now()
   }
 
   setPosition(){
@@ -25,8 +26,19 @@ export class Balloon{
     this.svg.setAttribute('y', this.y)
   }
 
+  getCenterCoords(){
+    return {
+      bx: this.x + dimensions.rx,
+      by: this.y + dimensions.ry
+    }
+  }
+
   update(deltaTime){
     this.y -= this.speed * deltaTime
     this.setPosition()
+  }
+
+  destroy(){
+    this.svg.remove()
   }
 }
