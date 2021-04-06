@@ -7,12 +7,21 @@ export class Game{
     this.ctx = document.querySelector('.game-svg')
     this.balloons = new Map()
     this.nail = new Nail(this.ctx)
-    this.createBalloon()
+    this.nextBalloonTime = 3
+    this.timeLeft = 0
   }
 
   createBalloon(){
     const balloon = new Balloon(this.ctx)
     this.balloons.set(balloon.id, balloon)
+  }
+
+  balloonsCreateInterval(deltaTime){
+    this.timeLeft += deltaTime
+    if(this.timeLeft > this.nextBalloonTime){
+      this.createBalloon()
+      this.timeLeft = 0
+    }
   }
 
   update(deltaTime){
@@ -28,5 +37,7 @@ export class Game{
         this.balloons.delete(id)
       })
     }
+
+    this.balloonsCreateInterval(deltaTime)
   }
 }
