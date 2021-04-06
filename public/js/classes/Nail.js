@@ -7,6 +7,7 @@ export class Nail{
     this.svg = createNailSvg()
     this.x = ctx.width.baseVal.value/2 - dimensions.w/2
     this.y = marginTop + dimensions.h
+    this.svg.setAttribute('x', this.x)
     this.svg.setAttribute('y', marginTop)
     ctx.append(this.svg)
 
