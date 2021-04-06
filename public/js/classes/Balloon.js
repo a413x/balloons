@@ -1,16 +1,19 @@
-import {createBalloonSvg, dimensions} from '../createBalloonSvg.js'
+import {createBalloonSvg} from '../createBalloonSvg.js'
 import {getRandom} from '../utils.js'
 
 export class Balloon{
   constructor(ctx){
-    this.svg = createBalloonSvg()
+    const balloon = createBalloonSvg()
+    this.svg = balloon.svg
+    this.w = balloon.w
+    this.h = balloon.h
+    this.rx = balloon.rx
+    this.ry = balloon.ry
+    
     ctx.append(this.svg)
 
     const ctxW = ctx.width.baseVal.value
     const ctxH = ctx.height.baseVal.value
-
-    this.w = this.svg.width.baseVal.value
-    this.h = this.svg.height.baseVal.value
 
     this.x = getRandom(0, ctxW - this.w)
     this.y = ctxH
@@ -28,8 +31,8 @@ export class Balloon{
 
   getCenterCoords(){
     return {
-      bx: this.x + dimensions.rx,
-      by: this.y + dimensions.ry
+      bx: this.x + this.rx,
+      by: this.y + this.ry
     }
   }
 

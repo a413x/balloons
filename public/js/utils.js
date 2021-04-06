@@ -10,3 +10,11 @@ export function getRandom(min, max) {
   max = Math.floor(max)
   return Math.floor(Math.random() * (max - min)) + min
 }
+
+export function createRandomDimensions(){
+  const w = getRandom(40,80)
+  const h = w*2
+  const rx = w/2
+  const ry = 1.175*rx
+  return {w, h, rx, ry}
+}

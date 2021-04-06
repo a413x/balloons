@@ -1,12 +1,11 @@
-import {dimensions} from './createBalloonSvg.js'
-
 export function collisionDetect(nail, balloons){
   const {nx, ny} = nail
   const collisions = []
 
   balloons.forEach((b, id) => {
     const {bx, by} = b.getCenterCoords()
-    const {rx, ry} = dimensions
+    const rx = b.rx
+    const ry = b.ry
 
     const angle = Math.atan2(ny - by, nx - bx)
 

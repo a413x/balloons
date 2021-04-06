@@ -1,9 +1,9 @@
-export const dimensions = {
+export const nailDimensions = {
   w: 8, h: 30,
 }
 
 export function createNailSvg(){
-  const {w, h} = dimensions
+  const {w, h} = nailDimensions
 
   const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg')
   const ellipse = document.createElementNS('http://www.w3.org/2000/svg', 'ellipse')
