@@ -36,9 +36,13 @@ export class Balloon{
     }
   }
 
-  update(deltaTime){
+  update(deltaTime, destroyCallback){
     this.y -= this.speed * deltaTime
     this.setPosition()
+    if(this.y + this.h < 0) {
+      this.destroy()
+      destroyCallback(this.id)
+    }
   }
 
   destroy(){
