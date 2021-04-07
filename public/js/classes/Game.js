@@ -7,12 +7,13 @@ export class Game{
     this.ctx = document.querySelector('.game-svg')
     this.balloons = new Map()
     this.nail = new Nail(this.ctx)
+    this.speedCoef = 5000
     this.nextBalloonTime = 3
     this.timeLeft = 0
   }
 
   createBalloon(){
-    const balloon = new Balloon(this.ctx)
+    const balloon = new Balloon(this.ctx, this.speedCoef)
     this.balloons.set(balloon.id, balloon)
   }
 

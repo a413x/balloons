@@ -2,7 +2,7 @@ import {createBalloonSvg} from '../createBalloonSvg.js'
 import {getRandom} from '../utils.js'
 
 export class Balloon{
-  constructor(ctx){
+  constructor(ctx, speedCoef){
     const balloon = createBalloonSvg()
     this.svg = balloon.svg
     this.w = balloon.w
@@ -20,7 +20,7 @@ export class Balloon{
 
     this.setPosition()
 
-    this.speed = getRandom(50, 100)
+    this.speed = Math.round(speedCoef/this.w)
     this.id = Date.now()
   }
 

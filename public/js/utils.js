@@ -12,7 +12,7 @@ export function getRandom(min, max) {
 }
 
 export function createRandomDimensions(){
-  const w = getRandom(40,80)
+  const w = getRandom(40,100)
   const h = w*2
   const rx = w/2
   const ry = 1.175*rx
