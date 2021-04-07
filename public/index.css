@@ -6,3 +6,24 @@
 .background{
   fill: lightblue;
 }
+
+.game-interface{
+  border: 1px solid;
+  width: 200px;
+  display: flex;
+  flex-flow: column;
+  font-family: sans-serif;
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+}
+.score{
+  display: flex;
+  justify-content: space-around;
+}
+.score-destroyed{
+  color: green;
+}
+.score-missed{
+  color: red;
+}

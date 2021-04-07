@@ -7,6 +7,10 @@ export class Game{
     this.ctx = document.querySelector('.game-svg')
     this.balloons = new Map()
     this.nail = new Nail(this.ctx)
+
+    this.scoreDestroyed = 0
+    this.scoreMissed = 0
+
     this.speedCoef = 5000
     this.nextBalloonTime = 3
     this.timeLeft = 0
@@ -25,8 +29,32 @@ export class Game{
     }
   }
 
+  balloonDestroy(id){
+    this.balloons.get(id).destroy()
+    this.balloons.delete(id)
+  }
+
+  updateScore(destroyed = null){
+    if(destroyed === true) this.scoreDestroyed++
+    else if(destroyed === false) this.scoreMissed++
+    document.querySelector('.score-destroyed .value').textContent = this.scoreDestroyed
+    document.querySelector('.score-missed .value').textContent = this.scoreMissed
+  }
+
+  resetScore(){
+    this.scoreDestroyed = 0
+    this.scoreMissed = 0
+    this.updateScore()
+  }
+
   update(deltaTime){
-    this.balloons.forEach(b => b.update(deltaTime))
+    this.balloons.forEach(b => b.update(
+      deltaTime,
+      id => {
+        this.updateScore(false)
+        this.balloonDestroy(id)
+      }
+    ))
 
     const collidingIds = collisionDetect(
       this.nail.getNailPoint(), this.balloons
@@ -34,8 +62,8 @@ export class Game{
 
     if(collidingIds.length){
       collidingIds.forEach(id => {
-        this.balloons.get(id).destroy()
-        this.balloons.delete(id)
+        this.balloonDestroy(id)
+        this.updateScore(true)
       })
     }
 
