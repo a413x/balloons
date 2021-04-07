@@ -17,8 +17,8 @@ export class Nail{
     this.move(pos.x)
   }
   move(x){
-    this.x = x - nailDimensions.w/2
-    this.svg.setAttribute('x', this.x)
+    this.x = x
+    this.svg.setAttribute('x', x - nailDimensions.w/2)
   }
   getNailPoint(){
     return {

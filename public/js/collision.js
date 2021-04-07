@@ -11,7 +11,7 @@ export function collisionDetect(nail, balloons){
 
     const radius = rx*ry/(
       Math.sqrt(
-        Math.pow(rx*Math.cos(angle),2) + Math.pow(ry*Math.sin(angle),2)
+        Math.pow(ry*Math.cos(angle),2) + Math.pow(rx*Math.sin(angle),2)
       )
     )
 
