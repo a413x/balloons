@@ -24,6 +24,7 @@ export class Game{
   }
 
   balloonsCreateInterval(deltaTime){
+    if(this.levelOver) return
     this.timeToNextBalloon += deltaTime
     if(this.timeToNextBalloon > this.level.nextBalloonTime){
       this.createBalloon()
@@ -42,7 +43,14 @@ export class Game{
       this.time += deltaTime
       document.querySelector('.timer').textContent = roundTime - time
     }else{
-      this.resetScore()
+      this.endLevel()
+    }
+  }
+
+  endLevel(){
+    this.levelOver = true
+    if(this.balloons.size === 0){
+      this.levelOver = false
       this.levelChange()
       this.time = 0
     }
@@ -62,6 +70,7 @@ export class Game{
   }
 
   levelChange(){
+    this.resetScore()
     this.level = nextLevel()
     document.querySelector('.level .value').textContent = this.level.ind
   }
