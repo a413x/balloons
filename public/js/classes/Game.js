@@ -1,6 +1,7 @@
 import {Balloon} from './Balloon.js'
 import {Nail} from './Nail.js'
 import {collisionDetect} from '../collision.js'
+import {nextLevel} from '../levels.js'
 const roundTime = 60
 
 export class Game{
@@ -10,23 +11,21 @@ export class Game{
     this.nail = new Nail(this.ctx)
 
     this.time = 0
+    this.timeToNextBalloon = 0
 
     this.scoreDestroyed = 0
     this.scoreMissed = 0
-
-    this.speedCoef = 5000
-    this.nextBalloonTime = 3
-    this.timeToNextBalloon = 0
+    this.levelChange()
   }
 
   createBalloon(){
-    const balloon = new Balloon(this.ctx, this.speedCoef)
+    const balloon = new Balloon(this.ctx, this.level.speedCoef)
     this.balloons.set(balloon.id, balloon)
   }
 
   balloonsCreateInterval(deltaTime){
     this.timeToNextBalloon += deltaTime
-    if(this.timeToNextBalloon > this.nextBalloonTime){
+    if(this.timeToNextBalloon > this.level.nextBalloonTime){
       this.createBalloon()
       this.timeToNextBalloon = 0
     }
@@ -42,6 +41,10 @@ export class Game{
     if(time <= roundTime){
       this.time += deltaTime
       document.querySelector('.timer').textContent = roundTime - time
+    }else{
+      this.resetScore()
+      this.levelChange()
+      this.time = 0
     }
   }
 
@@ -56,6 +59,11 @@ export class Game{
     this.scoreDestroyed = 0
     this.scoreMissed = 0
     this.updateScore()
+  }
+
+  levelChange(){
+    this.level = nextLevel()
+    document.querySelector('.level .value').textContent = this.level.ind
   }
 
   update(deltaTime){
