@@ -1,5 +1,6 @@
 import {Balloon} from './Balloon.js'
 import {Nail} from './Nail.js'
+import {Wind} from './Wind.js'
 import {collisionDetect} from '../collision.js'
 import {nextLevel} from '../levels.js'
 const roundTime = 60
@@ -9,6 +10,8 @@ export class Game{
     this.ctx = document.querySelector('.game-svg')
     this.balloons = new Map()
     this.nail = new Nail(this.ctx)
+    this.wind = new Wind(this.ctx)
+    this.wind.addWind()
 
     this.time = 0
     this.timeToNextBalloon = 0
@@ -78,6 +81,7 @@ export class Game{
   update(deltaTime){
     this.balloons.forEach(b => b.update(
       deltaTime,
+      this.wind.calculateWindAffect(b),
       id => {
         this.updateScore(false)
         this.balloonDestroy(id)

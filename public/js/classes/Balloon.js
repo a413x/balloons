@@ -12,11 +12,11 @@ export class Balloon{
     
     ctx.append(this.svg)
 
-    const ctxW = ctx.width.baseVal.value
-    const ctxH = ctx.height.baseVal.value
+    this.ctxW = ctx.width.baseVal.value
+    this.ctxH = ctx.height.baseVal.value
 
-    this.x = getRandom(0, ctxW - this.w)
-    this.y = ctxH
+    this.x = getRandom(0, this.ctxW - this.w)
+    this.y = this.ctxH
 
     this.setPosition()
 
@@ -36,8 +36,14 @@ export class Balloon{
     }
   }
 
-  update(deltaTime, destroyCallback){
+  update(deltaTime, wind, destroyCallback){
     this.y -= this.speed * deltaTime
+    this.x += wind
+    if(this.x >= this.ctxW - this.w){
+      this.x = this.ctxW - this.w
+    }else if(this.x <= 0){
+      this.x = 0
+    }
     this.setPosition()
     if(this.y + this.h < 0) {
       this.destroy()
