@@ -1,6 +1,7 @@
 import {Balloon} from './Balloon.js'
 import {Nail} from './Nail.js'
 import {Wind} from './Wind.js'
+import {Score} from './Score.js'
 import {collisionDetect} from '../collision.js'
 import {nextLevel} from '../levels.js'
 const roundTime = 60
@@ -12,12 +13,11 @@ export class Game{
     this.nail = new Nail(this.ctx)
     this.wind = new Wind(this.ctx)
     this.wind.addWind()
+    this.score = new Score()
 
     this.time = 0
     this.timeToNextBalloon = 0
 
-    this.scoreDestroyed = 0
-    this.scoreMissed = 0
     this.levelChange()
   }
 
@@ -59,21 +59,8 @@ export class Game{
     }
   }
 
-  updateScore(destroyed = null){
-    if(destroyed === true) this.scoreDestroyed++
-    else if(destroyed === false) this.scoreMissed++
-    document.querySelector('.score-destroyed .value').textContent = this.scoreDestroyed
-    document.querySelector('.score-missed .value').textContent = this.scoreMissed
-  }
-
-  resetScore(){
-    this.scoreDestroyed = 0
-    this.scoreMissed = 0
-    this.updateScore()
-  }
-
   levelChange(){
-    this.resetScore()
+    this.score.reset()
     this.level = nextLevel()
     document.querySelector('.level .value').textContent = this.level.ind
   }
@@ -83,7 +70,7 @@ export class Game{
       deltaTime,
       this.wind.calculateWindAffect(b),
       id => {
-        this.updateScore(false)
+        this.score.update(false)
         this.balloonDestroy(id)
       }
     ))
@@ -95,7 +82,7 @@ export class Game{
     if(collidingIds.length){
       collidingIds.forEach(id => {
         this.balloonDestroy(id)
-        this.updateScore(true)
+        this.score.update(true)
       })
     }
 
