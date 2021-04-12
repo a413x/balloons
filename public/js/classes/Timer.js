@@ -1,4 +1,4 @@
-const roundTime = 10
+const roundTime = 60
 export class Timer{
   constructor(){
     this.time = 0

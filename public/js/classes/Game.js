@@ -10,7 +10,6 @@ export class Game{
     this.ctx = document.querySelector('.game-svg')
     this.nail = new Nail(this.ctx)
     this.wind = new Wind(this.ctx)
-    this.wind.addWind()
     this.score = new Score()
     this.level = new Level()
     this.timer = new Timer()
@@ -34,6 +33,7 @@ export class Game{
     this.balloonsHandler.balloonsCreateInterval(
       deltaTime, this.level.params, !this.levelOver
     )
+    this.wind.windInterval(this.timer.timeSec)
     this.timer.update(deltaTime, () => this.endLevel())
   }
 }
