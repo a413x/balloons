@@ -43,4 +43,7 @@ export class BalloonsHandler{
       })
     }
   }
+  drawBalloons(){
+    this.balloons.forEach(b => b.draw())
+  }
 }
