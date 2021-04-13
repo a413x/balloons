@@ -1,29 +1,24 @@
-import {createNailSvg, nailDimensions} from '../createNailSvg.js'
+import {drawNail, nailDimensions} from '../textures/drawNail.js'
 import {Mouse} from './Mouse.js'
 const marginTop = 10
 
 export class Nail{
   constructor(ctx){
-    this.svg = createNailSvg()
-    this.x = ctx.width.baseVal.value/2 - nailDimensions.w/2
+    this.ctx = ctx
+    this.x = ctx.canvas.clientWidth/2 - nailDimensions.w/2
     this.y = marginTop + nailDimensions.h
-    this.svg.setAttribute('x', this.x)
-    this.svg.setAttribute('y', marginTop)
-    ctx.append(this.svg)
-
-    new Mouse(pos => this.mouseMove(pos), ctx)
+    new Mouse(pos => this.mouseMove(pos), ctx.canvas)
   }
   mouseMove(pos){
-    this.move(pos.x)
-  }
-  move(x){
-    this.x = x
-    this.svg.setAttribute('x', x - nailDimensions.w/2)
+    this.x = pos.x
   }
   getNailPoint(){
     return {
       nx: this.x,
       ny: this.y,
     }
+  }
+  draw(){
+    drawNail(this.ctx, this.getNailPoint())
   }
 }
