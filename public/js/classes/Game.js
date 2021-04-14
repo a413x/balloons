@@ -4,6 +4,7 @@ import {Wind} from './Wind.js'
 import {Score} from './Score.js'
 import {Level} from './Level.js'
 import {Timer} from './Timer.js'
+import {PlayButton} from './PlayButton.js'
 
 export class Game{
   constructor(){
@@ -13,7 +14,13 @@ export class Game{
     this.score = new Score()
     this.level = new Level()
     this.timer = new Timer()
+    this.playButton = new PlayButton(() => this.startGame())
     this.balloonsHandler = new BalloonsHandler(this.ctx)
+    this.paused = true
+  }
+  startGame(){
+    this.score.reset()
+    this.paused = false
   }
   endLevel(){
     this.levelOver = true
@@ -23,11 +30,13 @@ export class Game{
     }
   }
   levelChange(){
-    this.score.reset()
     this.level.nextLevel()
     this.timer.enable = true
+    this.paused = true
+    this.playButton.showButton(this.level.levelNum)
   }
   update(deltaTime){
+    if(this.paused) return
     this.balloonsHandler.updateBalloons(deltaTime, this.wind, this.score)
     this.balloonsHandler.checkCollisions(this.nail, this.score)
     this.balloonsHandler.balloonsCreateInterval(
