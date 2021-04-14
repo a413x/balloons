@@ -4,7 +4,7 @@ let prevTimeSec = 0
 
 export class Wind{
   constructor(ctx){
-    this.ctxW = ctx.width.baseVal.value
+    this.ctxW = ctx.canvas.clientWidth
     this.power = 0
     this.direction = 0
     this.windTime = 0

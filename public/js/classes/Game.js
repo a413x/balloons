@@ -7,7 +7,7 @@ import {Timer} from './Timer.js'
 
 export class Game{
   constructor(){
-    this.ctx = document.querySelector('.game-svg')
+    this.ctx = document.getElementById('canvas').getContext('2d')
     this.nail = new Nail(this.ctx)
     this.wind = new Wind(this.ctx)
     this.score = new Score()
@@ -35,5 +35,12 @@ export class Game{
     )
     this.wind.windInterval(this.timer.timeSec)
     this.timer.update(deltaTime, () => this.endLevel())
+    this.draw()
+  }
+  draw(){
+    this.ctx.fillStyle = 'lightblue'
+    this.ctx.fillRect(0, 0, this.ctx.canvas.clientWidth, this.ctx.canvas.clientHeight)
+    this.balloonsHandler.drawBalloons()
+    this.nail.draw()
   }
 }

@@ -11,7 +11,6 @@ export class BalloonsHandler{
     this.balloons.set(balloon.id, balloon)
   }
   balloonDestroy(id){
-    this.balloons.get(id).destroy()
     this.balloons.delete(id)
   }
   balloonsCreateInterval(deltaTime, params, enable){
