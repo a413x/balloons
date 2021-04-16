@@ -13,8 +13,7 @@ export class BalloonsHandler{
   balloonDestroy(id){
     this.balloons.delete(id)
   }
-  balloonsCreateInterval(deltaTime, params, enable){
-    if(!enable) return
+  balloonsCreateInterval(deltaTime, params){
     this.timeToNextBalloon += deltaTime
     if(this.timeToNextBalloon > params.nextBalloonTime){
       this.createBalloon(params.speedCoef)
