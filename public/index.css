@@ -34,6 +34,7 @@
 .play-btn .play-btn-btn{
   font-size: 120px;
 }
+.level-result{display: flex; flex-flow: column;}
 .score{
   display: flex;
   justify-content: space-around;

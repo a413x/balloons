@@ -29,7 +29,11 @@ export class Game{
   }
 
   update(deltaTime){
-    if(this.state === RUNNING){
+    if(this.state === START){
+
+      this.score.reset()
+
+    }else if(this.state === RUNNING){
 
       this.balloonsHandler.balloonsCreateInterval(deltaTime, this.level.params)
       this.timer.update(deltaTime, () => {this.state = ENDLEVEL})
@@ -37,8 +41,8 @@ export class Game{
     }else if (this.state === ENDLEVEL) {
 
       if(this.balloonsHandler.balloons.size === 0){
+        this.playButton.setResult(this.score)
         this.level.nextLevel()
-        this.score.reset()
         this.playButton.showButton(this.level.levelNum)
         this.state = START
       }

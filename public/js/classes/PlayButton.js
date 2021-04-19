@@ -12,6 +12,12 @@ export class PlayButton{
     this.setVisible(false)
     clickCallback()
   }
+  setResult(score){
+    document.querySelector('.level-result').innerHTML =
+    '<div>Your score is: </div>'+
+    '<span class="score-destroyed">'+score.scoreDestroyed+' destroyed</span> '
+    + '<span class="score-missed">'+score.scoreMissed+' missed</span>'
+  }
   setVisible(visible){
     this.container.style.display = visible ? 'flex' : 'none'
   }
