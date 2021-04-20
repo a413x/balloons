@@ -35,6 +35,20 @@
   font-size: 120px;
 }
 .level-result{display: flex; flex-flow: column;}
+.pause-btn-btn{
+  position: absolute;
+  bottom: 0;
+  left: 5px;
+  font-size: 25px;
+}
+.pause-btn-msg{
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 35px;
+}
 .score{
   display: flex;
   justify-content: space-around;

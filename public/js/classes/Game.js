@@ -5,6 +5,7 @@ import {Score} from './Score.js'
 import {Level} from './Level.js'
 import {Timer} from './Timer.js'
 import {PlayButton} from './PlayButton.js'
+import {PauseButton} from './PauseButton.js'
 
 const [START, RUNNING, ENDLEVEL] = [0,1,2]
 
@@ -17,8 +18,14 @@ export class Game{
     this.level = new Level()
     this.timer = new Timer()
     this.playButton = new PlayButton(() => { this.state = RUNNING })
+    this.pauseButton = new PauseButton(() => {
+      if(this.state === START) return
+      this.paused = !this.paused
+      this.pauseButton.setPause(this.paused)
+    })
     this.balloonsHandler = new BalloonsHandler(this.ctx)
     this.state = START
+    this.paused = false
   }
 
   draw(){
@@ -29,6 +36,7 @@ export class Game{
   }
 
   update(deltaTime){
+    if(this.paused) return
     if(this.state === START){
 
       this.score.reset()
