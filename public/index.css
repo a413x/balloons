@@ -17,8 +17,8 @@
 }
 .canvas-container{
   position: relative;
-  width: 800px;
-  height: 400px;
+  width: 500px;
+  height: 600px;
 }
 .play-btn{
   position: absolute;
@@ -30,6 +30,8 @@
   justify-content: center;
   align-items: center;
   font-size: 18px;
+  cursor: pointer;
+  user-select: none;
 }
 .play-btn .play-btn-btn{
   font-size: 120px;
@@ -37,9 +39,12 @@
 .level-result{display: flex; flex-flow: column;}
 .pause-btn-btn{
   position: absolute;
-  bottom: 0;
+  top: 0;
   left: 5px;
   font-size: 25px;
+  opacity: .3;
+  cursor: pointer;
+  user-select: none;
 }
 .pause-btn-msg{
   display: none;
