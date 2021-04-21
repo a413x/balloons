@@ -12,10 +12,11 @@ export class Timer{
       this.time += deltaTime
       this.setTimer()
     }else{
-      this.time = 0
+      this.reset()
       endLevel()
     }
   }
+  reset(){ this.time = 0 }
   setTimer(){
     document.querySelector('.timer').textContent = roundTime - this.timeSec
   }

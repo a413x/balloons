@@ -41,6 +41,7 @@ export class BalloonsHandler{
       })
     }
   }
+  reset(){ this.balloons.clear() }
   drawBalloons(){
     this.balloons.forEach(b => b.draw())
   }
