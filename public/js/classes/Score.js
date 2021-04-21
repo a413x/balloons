@@ -1,11 +1,15 @@
 export class Score{
-  constructor(){
+  constructor(missedCallback){
     this.scoreDestroyed = 0
     this.scoreMissed = 0
+    this.missedCallback = missedCallback
   }
   update(type = null){
     if(type === true) this.scoreDestroyed++
-    else if(type === false) this.scoreMissed++
+    else if(type === false) {
+      this.scoreMissed++
+      this.missedCallback()
+    }
     else if(type === null) {
       this.scoreDestroyed = 0
       this.scoreMissed = 0

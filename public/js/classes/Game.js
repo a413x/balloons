@@ -14,7 +14,7 @@ export class Game{
     this.ctx = document.getElementById('canvas').getContext('2d')
     this.nail = new Nail(this.ctx)
     this.wind = new Wind(this.ctx)
-    this.score = new Score()
+    this.score = new Score(() => this.missed())
     this.level = new Level()
     this.timer = new Timer()
     this.playButton = new PlayButton(() => { this.state = RUNNING })
@@ -26,6 +26,7 @@ export class Game{
     this.balloonsHandler = new BalloonsHandler(this.ctx)
     this.state = START
     this.paused = false
+    this.draw()
   }
 
   draw(){
@@ -35,13 +36,23 @@ export class Game{
     this.nail.draw()
   }
 
+  missed(){
+    if(this.score.scoreMissed >= this.level.params.balloonsToLoose){
+      this.playButton.showButton(this.level)
+      this.state = START
+    }
+  }
+
   update(deltaTime){
+    this.draw()
     if(this.paused) return
-    if(this.state === START){
-
+    if(this.state === START) {
       this.score.reset()
-
-    }else if(this.state === RUNNING){
+      this.timer.reset()
+      this.balloonsHandler.reset()
+      return
+    }
+    else if(this.state === RUNNING){
 
       this.balloonsHandler.balloonsCreateInterval(deltaTime, this.level.params)
       this.timer.update(deltaTime, () => {this.state = ENDLEVEL})
@@ -49,9 +60,8 @@ export class Game{
     }else if (this.state === ENDLEVEL) {
 
       if(this.balloonsHandler.balloons.size === 0){
-        this.playButton.setResult(this.score)
         this.level.nextLevel()
-        this.playButton.showButton(this.level.levelNum)
+        this.playButton.showButton(this.level, this.score)
         this.state = START
       }
 
@@ -59,6 +69,5 @@ export class Game{
     this.balloonsHandler.updateBalloons(deltaTime, this.wind, this.score)
     this.balloonsHandler.checkCollisions(this.nail, this.score)
     this.wind.windInterval(this.timer.timeSec)
-    this.draw()
   }
 }
