@@ -43,7 +43,7 @@ export class Wind{
     prevTimeSec = timeSec
   }
   setWind(){
-    let dir = this.direction > 0 ? 'EAST' : 'WEST'
+    let dir = this.direction > 0 ? 'WEST' : 'EAST'
     if(this.power === 0) dir = 'NONE'
     document.querySelector('.wind-info .wind-dir').textContent = dir
     document.querySelector('.wind-info .wind-pow').textContent = this.power
