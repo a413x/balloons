@@ -1,5 +1,4 @@
 import {getRandom} from '../utils.js'
-const coef = 5000
 let prevTimeSec = 0
 
 export class Wind{

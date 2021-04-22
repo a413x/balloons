@@ -11,10 +11,9 @@ export class Balloon{
     this.ry = this.dim.ry
     this.ctx = ctx
     this.ctxW = ctx.canvas.clientWidth
-    this.ctxH = ctx.canvas.clientHeight
-
+    
     this.x = getRandom(0, this.ctxW - this.w)
-    this.y = this.ctxH
+    this.y = ctx.canvas.clientHeight
 
     this.speed = Math.round(speedCoef/this.w)
     this.id = Date.now()
