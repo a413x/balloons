@@ -1,4 +1,5 @@
 import {Game} from './classes/Game.js'
+import {onResize} from './resize.js'
 
 const gameObj = new Game()
 
@@ -19,3 +20,6 @@ function gameLoop(time){
 }
 
 requestAnimationFrame(gameLoop)
+
+onResize()
+window.addEventListener('resize', onResize)
