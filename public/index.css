@@ -22,7 +22,7 @@ body {
 .canvas-container{
   position: relative;
   width: 500px;
-  height: 600px;
+  height: 800px;
 }
 .play-btn{
   position: absolute;
