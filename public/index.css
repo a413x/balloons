@@ -11,7 +11,7 @@ body {
 }
 
 .game-interface{
-  width: 200px;
+  width: 120px;
   display: flex;
   flex-flow: column;
   font-size: 20px;
@@ -44,8 +44,8 @@ body {
 .pause-btn-btn{
   position: absolute;
   top: 0;
-  left: 5px;
-  font-size: 25px;
+  right: 5px;
+  font-size: 30px;
   opacity: .3;
   cursor: pointer;
   user-select: none;
@@ -60,6 +60,7 @@ body {
 }
 .score{
   display: flex;
+  flex-flow: column;
   justify-content: space-around;
 }
 .score-destroyed{ color: green; }
