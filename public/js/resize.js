@@ -1,6 +1,6 @@
 export function onResize(){
   const gameW = 700
-  const gameH = 800
+  const gameH = 850
   const w = document.documentElement.clientWidth
   const h = document.documentElement.clientHeight
   if(h < gameH || w < gameW){
