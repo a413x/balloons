@@ -10,9 +10,12 @@ export class Wind{
   }
   addWind(){
     this.direction = Math.random() < 0.5 ? -1 : 1
-    this.power = getRandom(1,5)
-    this.windDuration = getRandom(5,10)
+    this.power = this.getRandomPower()
+    this.windDuration = getRandom(1,8)
     this.setWind()
+  }
+  getRandomPower(){
+    return Math.round((Math.random()*2 + 1)*10)/10
   }
   cancelWind(){
     this.power = 0
@@ -29,7 +32,8 @@ export class Wind{
   windInterval(timeSec){
     if(prevTimeSec === timeSec) return
     if(this.power === 0){
-      if(Math.random() < 0.1) {
+      //chance of appearance every second
+      if(Math.random() < 0.2) {
         this.windTime = 0
         this.addWind()
       }
